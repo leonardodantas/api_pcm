@@ -11,6 +11,9 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "consign": "^0.1.6",
-    "express": "^4.16.4"
+    "crypto": "^1.0.1",
+    "express": "^4.16.4",
+    "md5": "^2.2.1",
+    "pg": "^7.9.0"
   }
 }
