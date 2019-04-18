@@ -3,14 +3,39 @@
  }
 
  Usuario.prototype.get = function(callback){
-     this._connection.query("SELECT * FROM USUARIOS",callback)
+     this._connection.query(`SELECT USUARIOS.ID AS ID, NOME,EMAIL,CARGO FROM USUARIOS 
+        INNER JOIN CARGO_USUARIO ON ( USUARIOS.FK_CARGO_USUARIO = CARGO_USUARIO.ID)
+            WHERE STATUS = FALSE `,
+                callback)
  }
+
+ Usuario.prototype.getQtdId = function(callback){
+    this._connection.query(`SELECT COUNT(ID) FROM USUARIOS WHERE STATUS = FALSE`,
+               callback)
+}
 
  Usuario.prototype.post = function(user, callback){
      this._connection.query(
          `INSERT INTO USUARIOS 
             (fk_cargo_usuario, email, nome, senha, status) 
                 VALUES ('${user.cargo_usuario}','${user.email}','${user.nome}', '${user.senha}', '0' )`, callback)
+ }
+
+ Usuario.prototype.auth = function(user,callback){
+
+     this._connection.query(
+         `SELECT * FROM USUARIOS 
+            WHERE EMAIL = '${user.email}' AND SENHA = '${user.senha}'`,
+            callback)
+     
+ }
+
+ Usuario.prototype.delete = function(id, callback){
+    
+    this._connection.query(
+        `DELETE FROM USUARIOS WHERE ID = '${id}'`,
+            callback)
+            
  }
 
  module.exports = function(){
