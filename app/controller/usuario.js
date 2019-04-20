@@ -88,3 +88,14 @@
 
    })
  }
+
+ module.exports.put = function(app,req,res){
+    let connection = db()
+    let usuario =  new app.app.models.usuario(connection)
+
+    usuario.put(req,(err,data)=>{
+      if(err) return res.status(400).send({err})
+      return res.status(200).send(data)
+
+    })
+ }

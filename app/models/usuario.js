@@ -38,6 +38,19 @@
             
  }
 
+ Usuario.prototype.put = function(req, callback){
+
+    console.log(req.body)
+    let id = req.body.id
+    let fk_cargo_usuario = req.body.fk_cargo_usuario
+
+    this._connection.query(
+        `UPDATE usuarios
+        SET fk_cargo_usuario = ${fk_cargo_usuario} , status = true
+        WHERE id = ${id}`, callback
+    )
+ }
+
  module.exports = function(){
      return Usuario
  } 
