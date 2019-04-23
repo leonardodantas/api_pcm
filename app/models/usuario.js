@@ -9,6 +9,14 @@
                 callback)
  }
 
+ Usuario.prototype.getAll = function(callback){
+    this._connection.query(`SELECT USUARIOS.ID AS ID, NOME,EMAIL,CARGO, FUNCAO FROM USUARIOS 
+       INNER JOIN CARGO_USUARIO ON ( USUARIOS.FK_CARGO_USUARIO = CARGO_USUARIO.ID)
+        INNER JOIN FUNCOES_USUARIO ON (USUARIOS.FK_FUNCAO = FUNCOES_USUARIO.ID)
+           WHERE STATUS = TRUE AND FK_CARGO_USUARIO != 4`,
+               callback)
+}
+
  Usuario.prototype.getQtdId = function(callback){
     this._connection.query(`SELECT COUNT(ID) FROM USUARIOS WHERE STATUS = FALSE`,
                callback)
@@ -17,8 +25,8 @@
  Usuario.prototype.post = function(user, callback){
      this._connection.query(
          `INSERT INTO USUARIOS 
-            (fk_cargo_usuario, email, nome, senha, status) 
-                VALUES ('${user.cargo_usuario}','${user.email}','${user.nome}', '${user.senha}', '0' )`, callback)
+            (fk_cargo_usuario, email, nome, senha, status, fk_funcao) 
+                VALUES ('${user.cargo_usuario}','${user.email}','${user.nome}', '${user.senha}', '0', 1 )`, callback)
  }
 
  Usuario.prototype.auth = function(user,callback){

@@ -11,7 +11,21 @@
        return res.send(data.rows)
       
     })
+    
  }
+
+ module.exports.getAll = function(app,req,res){
+
+   let connection = db();
+   let usuario = new app.app.models.usuario(connection)
+
+   usuario.getAll((err,data)=>{
+      if(err)  return res.send({error : err })
+      return res.send(data.rows)  
+   })
+
+   
+}
 
  module.exports.getQtdId = function(app,req,res){
 
@@ -23,12 +37,8 @@
       return res.send(data.rows)
      
    })
+   
 }
-
- module.exports.getId = function(app,req,res){
-
-   let connection = db()
- }
  
  module.exports.post = function(app, req, res){
 
@@ -46,6 +56,7 @@
       console.log(data.rows)
       return res.status(200).send(user)
    })
+   
  }
 
  module.exports.auth = function(app,req,res){
@@ -69,9 +80,8 @@
          }
       }
       return res.status(400).send({err : "Dados incopativeis"}) 
-      
-      
    })
+   
  }
 
  module.exports.delete = function(app,req,res){
@@ -87,6 +97,7 @@
       return res.status(200).send(data)
 
    })
+   
  }
 
  module.exports.put = function(app,req,res){
@@ -98,4 +109,5 @@
       return res.status(200).send(data)
 
     })
+    
  }

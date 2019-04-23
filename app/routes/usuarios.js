@@ -5,6 +5,12 @@ module.exports = (app)=>{
         app.app.controller.usuario.get(app,req,res);
     })
 
+    app.get('/userAll', (req, res)=>{
+        
+        app.app.controller.usuario.getAll(app,req,res);
+    })
+
+
     app.post('/user', (req, res)=>{
 
         app.app.controller.usuario.post(app,req,res)
