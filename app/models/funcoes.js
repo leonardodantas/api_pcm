@@ -19,12 +19,14 @@
  }
 
  Funcoes.prototype.put = function(req, callback){
+    
     let funcao = req.body.funcao
-    let id = req.body.id
-
+    let id = 1
+    console.log(req.body)
+    console.log(id)
     this._connection.query(`UPDATE funcoes_usuario
 	set funcao = '${funcao}'
-	WHERE id = '${id}' ;`,
+	WHERE id = '${id}'`,
     callback)
  }
 
