@@ -13,6 +13,19 @@
     
  }
 
+ module.exports.getAll = function(app,req,res){
+
+   let connection = db();
+   let equipamentos = new app.app.models.equipamentos(connection)
+
+   equipamentos.getAll((err,data)=>{
+      if(err)  return res.send({error : err })
+      return res.send(data.rows)
+     
+   })
+   
+}
+
  
  module.exports.post = function(app,req,res){
 
@@ -20,6 +33,19 @@
    let equipamentos = new app.app.models.equipamentos(connection)
 
    equipamentos.post(req,(err,data)=>{
+      if(err)  return res.send({error : err })
+      return res.send(data.rows)
+     
+   })
+   
+}
+
+module.exports.atualizarEquip = function(app,req,res){
+
+   let connection = db();
+   let equipamentos = new app.app.models.equipamentos(connection)
+
+   equipamentos.atualizarEquip(req,(err,data)=>{
       if(err)  return res.send({error : err })
       return res.send(data.rows)
      
