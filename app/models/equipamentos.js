@@ -7,6 +7,11 @@
                 callback)
  }
 
+ Equipamento.prototype.getLivre = function(callback){
+
+   this._connection.query(`SELECT * FROM EQUIPAMENTO WHERE STATUS = 'LIVRE' ORDER BY ID ASC`, callback)
+ }
+
  Equipamento.prototype.getAll = function(callback){
    this._connection.query(`SELECT * FROM EQUIPAMENTO ORDER BY ID ASC`,
                callback)

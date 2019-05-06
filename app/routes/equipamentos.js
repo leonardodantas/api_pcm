@@ -4,6 +4,10 @@ module.exports = (app)=>{
         app.app.controller.equipamentos.get(app,req,res)
     })
 
+    app.get('/equipamento/livre', (req,res)=>{
+        app.app.controller.equipamentos.getLivre(app,req,res)
+    })
+
     app.get('/equipamentos', (req,res)=>{
         app.app.controller.equipamentos.getAll(app,req,res)
     })

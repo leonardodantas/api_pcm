@@ -13,6 +13,19 @@
     
  }
 
+ module.exports.getLivre = function(app,req,res){
+
+   let connection = db();
+   let equipamentos = new app.app.models.equipamentos(connection)
+
+   equipamentos.getLivre((err,data)=>{
+      if(err)  return res.send({error : err })
+      return res.send(data.rows)
+     
+   })
+   
+}
+
  module.exports.getAll = function(app,req,res){
 
    let connection = db();
