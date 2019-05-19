@@ -5,6 +5,11 @@ module.exports = (app)=>{
         app.app.controller.usuario.get(app,req,res);
     })
 
+    app.get('/user/pendencia', (req, res)=>{
+        
+        app.app.controller.usuario.getAllUserForPend(app,req,res);
+    })
+
     app.get('/userAll', (req, res)=>{
         
         app.app.controller.usuario.getAll(app,req,res);

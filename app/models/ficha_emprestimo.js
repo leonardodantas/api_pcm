@@ -85,7 +85,7 @@ FichaEmprestimo.prototype.post = function(req,callback){
    FichaEmprestimo.prototype.recusar = function(req,callback){
 
     let id = req.body.id
-    this._connection.query(`UPDATE FICHA_EMPRESTIMO SET STATUS = FALSE WHERE ID = ${id}`, callback)
+    this._connection.query(`UPDATE FICHA_EMPRESTIMO SET STATUS = FALSE, data_emprestimo = to_timestamp(${Date.now()/1000}) WHERE ID = ${id} `, callback)
    }
 
    FichaEmprestimo.prototype.aceitar = function(req,callback){
@@ -95,16 +95,29 @@ FichaEmprestimo.prototype.post = function(req,callback){
    }
 
    FichaEmprestimo.prototype.getAllAlugadas = function(callback){
-    console.log('aqui')
+  
     this._connection.query(`SELECT ficha_emprestimo.id as id, id_emprestimo,usuarios.nome as nome_usuario, data_requisicao, data_emprestimo,motivo_emprestimo, equipamento.nome as nome
     FROM public.ficha_emprestimo INNER JOIN
       equipamento on (ficha_emprestimo.id_emprestimo = equipamento.id ) inner join usuarios on
       (ficha_emprestimo.usuario_id_user = usuarios.id)
         where ficha_emprestimo.status = true  and data_devolucao is null order by id asc`, callback)
    }
+
+   FichaEmprestimo.prototype.getAllFinalizadas = function(callback){
+  
+    this._connection.query(`SELECT ficha_emprestimo.id as id, id_emprestimo,usuarios.nome as nome_usuario, data_requisicao, data_emprestimo, data_devolucao,motivo_emprestimo, equipamento.nome as nome
+    FROM public.ficha_emprestimo INNER JOIN
+      equipamento on (ficha_emprestimo.id_emprestimo = equipamento.id ) inner join usuarios on
+      (ficha_emprestimo.usuario_id_user = usuarios.id)
+        where ficha_emprestimo.status = true  and data_devolucao is not null order by id asc`, callback)
+   }
+
+
+
  
 
 
  module.exports = function(){
      return FichaEmprestimo
  } 
+ 

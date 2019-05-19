@@ -116,6 +116,19 @@ module.exports.getAllAlugadas = function(app,req,res){
    
 }
 
+module.exports.getAllFinalizadas = function(app,req,res){
+  
+   let connection = db();
+   let ficha_emprestimo = new app.app.models.ficha_emprestimo(connection)
+
+   ficha_emprestimo.getAllFinalizadas((err,data)=>{
+      if(err)  return res.send({error : err })
+      return res.send(data.rows)
+     
+   })
+   
+}
+
 module.exports.rejeitadas = function(app,req,res){
    
    let connection = db();

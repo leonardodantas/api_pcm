@@ -27,6 +27,19 @@
    
 }
 
+module.exports.getAllUserForPend = function(app,req,res){
+
+   let connection = db();
+   let usuario = new app.app.models.usuario(connection)
+
+   usuario.getAllUserForPend((err,data)=>{
+      if(err)  return res.send({error : err })
+      return res.send(data.rows)  
+   })
+
+   
+}
+
  module.exports.getQtdId = function(app,req,res){
 
    let connection = db();

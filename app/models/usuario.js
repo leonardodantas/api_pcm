@@ -17,6 +17,12 @@
                callback)
 }
 
+Usuario.prototype.getAllUserForPend = function(callback){
+    this._connection.query(`SELECT  email, nome
+	FROM public.usuarios where fk_cargo_usuario = 3;`,
+               callback)
+}
+
  Usuario.prototype.getQtdId = function(callback){
     this._connection.query(`SELECT COUNT(ID) FROM USUARIOS WHERE STATUS = FALSE`,
                callback)

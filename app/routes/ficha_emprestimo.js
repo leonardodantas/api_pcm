@@ -30,6 +30,11 @@ module.exports = (app)=>{
     app.app.controller.ficha_emprestimo.getAllAlugadas(app,req,res)   
    })
 
+   app.get('/ficha_emprestimo/all/finalizadas', (req,res)=>{
+
+    app.app.controller.ficha_emprestimo.getAllFinalizadas(app,req,res)   
+   })
+
    app.get('/ficha_emprestimo/all/:id', (req,res)=>{
     app.app.controller.ficha_emprestimo.all(app,req,res)   
    })
